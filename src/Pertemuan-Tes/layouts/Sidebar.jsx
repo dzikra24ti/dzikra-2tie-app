@@ -1,10 +1,18 @@
-import { FaSignOutAlt } from "react-icons/fa"; 
-import { AiFillHome } from "react-icons/ai"; 
-import { FaHistory } from "react-icons/fa"; 
-import { FaWallet } from "react-icons/fa"; 
-import { BiWallet } from "react-icons/bi"; 
-import { AiFillBook } from "react-icons/ai"; 
+import { FaSignOutAlt, FaHistory, FaWallet } from "react-icons/fa"; 
+import { AiFillHome, AiFillBook } from "react-icons/ai"; 
+// 1. Ganti Link menjadi NavLink
+import { NavLink } from "react-router-dom"; 
+
 export default function Sidebar() {
+  
+  // 2. Buat variabel menuClass untuk menangani logika status active
+  const menuClass = ({ isActive }) => 
+    `flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ease-in-out group ${
+      isActive 
+        ? "bg-[#F59E0B] text-white shadow-xl shadow-yellow-200" // Class saat aktif
+        : "text-gray-400 hover:bg-[#F59E0B] hover:text-white hover:shadow-xl hover:shadow-yellow-200" // Class saat biasa
+    }`;
+
   return (
     <div className="fixed left-0 top-0 h-screen w-20 md:w-64 bg-white border-r border-yellow-100 flex flex-col p-6 z-[999]">
       
@@ -16,32 +24,32 @@ export default function Sidebar() {
 
       {/* DAFTAR MENU */}
       <div className="flex flex-col gap-3">
-        <button className="flex items-center gap-4 p-4 text-gray-400 rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#F59E0B] hover:text-white hover:shadow-xl hover:shadow-yellow-200 group">
+        {/* Gunakan NavLink dan panggil variabel menuClass */}
+        <NavLink to="/" className={menuClass}>
           <div className="w-6 text-center"><i><AiFillHome /></i></div>
           <span className="hidden md:block font-bold text-sm">Dashboard</span>
-        </button>
+        </NavLink>
 
-        <button className="flex items-center gap-4 p-4 text-gray-400 rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#F59E0B] hover:text-white hover:shadow-xl hover:shadow-yellow-200 group">
+        <NavLink to="/riwayat" className={menuClass}>
           <div className="w-6 text-center"><i><FaHistory /></i></div>
           <span className="hidden md:block font-bold text-sm">Riwayat</span>
-        </button>
+        </NavLink>
 
-        <button className="flex items-center gap-4 p-4 text-gray-400 rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#F59E0B] hover:text-white hover:shadow-xl hover:shadow-yellow-200 group">
+        <NavLink to="/pengeluaran" className={menuClass}>
           <div className="w-6 text-center"><i><FaWallet /></i></div>
           <span className="hidden md:block font-bold text-sm">Pengeluaran</span>
-        </button>
+        </NavLink>
 
-        <button className="flex items-center gap-4 p-4 text-gray-400 rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#F59E0B] hover:text-white hover:shadow-xl hover:shadow-yellow-200 group">
+        <NavLink to="/laporan" className={menuClass}>
           <div className="w-6 text-center"><i><AiFillBook/></i></div>
           <span className="hidden md:block font-bold text-sm">Laporan</span>
-        </button>
+        </NavLink>
       </div>
 
       <div className="mt-auto pt-6 border-t border-yellow-50 space-y-4">
-        
         <div className="hidden md:flex items-center gap-3 px-2">
           <img 
-            src="public/img/img3.jpg" 
+            src="/img/img3.jpg" 
             alt="Profile" 
             className="w-10 h-10 rounded-xl shadow-sm border border-yellow-100"
           />
@@ -58,7 +66,6 @@ export default function Sidebar() {
           <span className="hidden md:block font-bold text-sm">Keluar</span>
         </button>
       </div>
-
     </div>
   );
 }
