@@ -4,9 +4,11 @@ import PageHeader from "./components/PageHeader";
 import Header from './layouts/Header';
 import Sidebar from './layouts/Sidebar';
 import Dashboard from './pages/Dashboard';
+import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root"))
     .render(
+      <BrowserRouter>
     <div className="flex min-h-screen">
         <Sidebar />
         <PageHeader/>
@@ -17,4 +19,5 @@ createRoot(document.getElementById("root"))
         </main>
       </div>
     </div>
+    </BrowserRouter>
 );
