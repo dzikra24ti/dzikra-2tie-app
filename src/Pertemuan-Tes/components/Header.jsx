@@ -1,3 +1,4 @@
+import { AiFillBell } from "react-icons/ai"; 
 export default function Header() {
   return (
     <div className="p-6 flex justify-between items-center bg-transparent">
@@ -12,10 +13,10 @@ export default function Header() {
           <p className="text-[10px] text-yellow-600 font-bold">POS VERSION 1.2</p>
         </div>
         <div className="relative w-12 h-12 bg-white rounded-2xl shadow-sm border border-yellow-100 flex items-center justify-center cursor-pointer hover:bg-yellow-50 transition-colors">
-          <i className="fas fa-bell text-yellow-500 text-lg"></i>
+         <AiFillBell className="text-yellow-500 text-2xl" />
           <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
         </div>
       </div>
     </div>
   );
-}
+} 

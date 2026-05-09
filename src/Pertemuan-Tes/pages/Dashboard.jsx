@@ -1,3 +1,4 @@
+import { AiOutlineCheck } from "react-icons/ai"; 
 import PageHeader from "../components/PageHeader";
 
 export default function Dashboard() {
@@ -72,7 +73,7 @@ export default function Dashboard() {
                             <div className="flex justify-between items-center bg-white/50 p-4 rounded-2xl border border-white/50 shadow-sm transition-transform hover:scale-[1.02]">
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 bg-yellow-500 text-white rounded-xl flex items-center justify-center shadow-md shadow-yellow-100">
-                                        <i className="fas fa-check text-xs"></i>
+                                        <AiOutlineCheck />
                                     </div>
                                     <div>
                                         <p className="text-[13px] font-extrabold text-gray-800 tracking-tight">2x Paha Atas, 1x Nasi</p>
@@ -85,7 +86,7 @@ export default function Dashboard() {
                             <div className="flex justify-between items-center bg-white/50 p-4 rounded-2xl border border-white/50 shadow-sm transition-transform hover:scale-[1.02]">
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 bg-yellow-500 text-white rounded-xl flex items-center justify-center shadow-md shadow-yellow-100">
-                                        <i className="fas fa-check text-xs"></i>
+                                        <AiOutlineCheck />
                                     </div>
                                     <div>
                                         <p className="text-[13px] font-extrabold text-gray-800 tracking-tight">1x Paket Puas</p>

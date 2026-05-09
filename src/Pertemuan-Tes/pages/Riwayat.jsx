@@ -17,12 +17,12 @@ const Riwayat = () => {
       <div className="bg-white rounded-[40px] shadow-sm border border-yellow-50 overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-amber-50/50">
-              <th className="p-6 text-xs font-bold uppercase text-amber-700 tracking-widest">ID</th>
-              <th className="p-6 text-xs font-bold uppercase text-amber-700 tracking-widest">Waktu</th>
-              <th className="p-6 text-xs font-bold uppercase text-amber-700 tracking-widest">Pesanan</th>
-              <th className="p-6 text-xs font-bold uppercase text-amber-700 tracking-widest">Total</th>
-              <th className="p-6 text-xs font-bold uppercase text-amber-700 tracking-widest">Metode</th>
+            <tr className="bg-[#F59E0B] ">
+              <th className="p-6 text-xs font-bold uppercase text-white tracking-widest">ID</th>
+              <th className="p-6 text-xs font-bold uppercase text-white tracking-widest">Waktu</th>
+              <th className="p-6 text-xs font-bold uppercase text-white tracking-widest">Pesanan</th>
+              <th className="p-6 text-xs font-bold uppercase text-white tracking-widest">Total</th>
+              <th className="p-6 text-xs font-bold uppercase text-white tracking-widest">Metode</th>
             </tr>
           </thead>
           <tbody className="text-gray-600">
