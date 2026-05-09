@@ -25,7 +25,7 @@ export default function Sidebar() {
       {/* DAFTAR MENU */}
       <div className="flex flex-col gap-3">
         {/* Gunakan NavLink dan panggil variabel menuClass */}
-        <NavLink to="/" className={menuClass}>
+        <NavLink to="/dashboard" className={menuClass}>
           <div className="w-6 text-center"><i><AiFillHome /></i></div>
           <span className="hidden md:block font-bold text-sm">Dashboard</span>
         </NavLink>
