@@ -1,31 +1,38 @@
 import "./assets/tailwind.css";
-import Sidebar from "./layouts/Sidebar";
-import Header from "./layouts/Header";
-import PageHeader from "./components/PageHeader";
-import Dashboard from "./pages/Dashboard";
+import React, { Suspense } from "react";
+import Loading from "./components/Loading";
+import MainLayout from "./layouts/MainLayout";
+import AuthLayout from "./layouts/AuthLayout"; 
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import Forgot from "./pages/auth/Forgot";
+  const Sidebar = React.lazy(() => import("./components/Sidebar"))
+  const Header = React.lazy(() => import("./components/Header"))
+  const PageHeader = React.lazy(() => import("./components/PageHeader"))
+  const Dashboard = React.lazy(() => import("./pages/Dashboard"))
 import Orders from "./pages/Orders";
 import Customers from "./pages/Customers";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 
-function App() {
+export default function App() {
   return (
-    <div id="app-container" className="bg-gray-100 min-h-screen flex">
-      <div id="layout-wrapper" className="flex flex-row flex-1">
-        <Sidebar />
-        <div id="main-content" className="flex-1 p-4">
-          <Header />
-          <PageHeader />
+          <Suspense fallback={<Loading />}>
           <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Dashboard />} />
+          <Route element={<MainLayout/>}>
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/customers" element={<Customers />} />
+            <Route path="*" element={<NotFound />} />
+            </Route>
+
+          <Route element={<AuthLayout/>}>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register/>} />
+            <Route path="/forgot" element={<Forgot/>} />
+          </Route>
           </Routes>
-        </div>
-      </div>
-    </div>
-  );
+          </Suspense>
+  )
 }
 
-export default App;
