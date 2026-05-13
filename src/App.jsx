@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import Loading from "./components/Loading";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout"; 
+import LandingPage from "./pages/visitor/LandingPage";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Forgot from "./pages/auth/Forgot";
@@ -19,16 +20,16 @@ export default function App() {
   return (
           <Suspense fallback={<Loading />}>
           <Routes>
+            <Route path="/" element={<LandingPage />} />
           <Route element={<MainLayout/>}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/customers" element={<Customers />} />
-            <Route path="*" element={<NotFound />} />
             </Route>
-
+          <Route path="*" element={<NotFound />} />
           <Route element={<AuthLayout/>}>
-            <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register/>} />
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/signup" element={<Register/>} />
             <Route path="/forgot" element={<Forgot/>} />
           </Route>
           </Routes>

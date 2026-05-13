@@ -24,12 +24,6 @@ export default function Sidebar() {
           id="logo-title"
           className="font-poppins text-[48px] text-gray-900"
         >
-          Tak
-        </span>
-        <span
-          id="logo-title"
-          className="font-poppins text-[48px] text-gray-900"
-        >
           Sedap{" "}
           <b id="logo-dot" className="text-hijau">
             .
@@ -46,7 +40,7 @@ export default function Sidebar() {
           <li>
             <NavLink
               id="menu-1"
-              to="/"
+              to="/dashboard"
               className={menuClass}>
               <MdSpaceDashboard className="mr-4 text-xl" />
               Dashboard

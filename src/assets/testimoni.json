@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Andi Wijaya",
+    "avatar": "https://i.pravatar.cc/150?u=andi",
+    "review": "Makanannya selalu hangat sampai di rumah. Burger-nya juara banget, dagingnya juicy!",
+    "rating": 5
+  },
+  {
+    "id": 2,
+    "name": "Siti Aminah",
+    "avatar": "https://i.pravatar.cc/150?u=siti",
+    "review": "Aplikasi paling simpel buat pesen makan kantor. Driver-nya ramah-ramah dan sopan.",
+    "rating": 5
+  },
+  {
+    "id": 3,
+    "name": "Budi Santoso",
+    "avatar": "https://i.pravatar.cc/150?u=budi",
+    "review": "Pilihan menu sehatnya banyak banget. Cocok buat saya yang lagi program diet tapi tetep mau enak.",
+    "rating": 4
+  },
+  {
+    "id": 4,
+    "name": "Rina Kartika",
+    "avatar": "https://i.pravatar.cc/150?u=rina",
+    "review": "Promo diskonnya nggak main-main! Sering dapet potongan harga gede buat pizza favorit.",
+    "rating": 5
+  },
+  {
+    "id": 5,
+    "name": "Deni Pratama",
+    "avatar": "https://i.pravatar.cc/150?u=deni",
+    "review": "Packaging sangat aman, tidak ada tumpah sama sekali meskipun pesen sup. Mantap Foodies!",
+    "rating": 5
+  }
+]
