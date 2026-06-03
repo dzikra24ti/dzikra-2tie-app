@@ -3,6 +3,8 @@ import PageHeader from "../components/PageHeader";
 
 export default function Dashboard() {
     return (
+        <div><PageHeader title="Dashboard" currentBreadcrumb="Overview" />
+
         <div id="dashboard-container">
             <div id="dashboard-grid" className="p-5 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
                 <div id="dashboard-orders" className="flex items-center space-x-5 bg-white rounded-lg shadow-md p-4">
@@ -46,5 +48,6 @@ export default function Dashboard() {
                 </div>
             </div>
         </div>
+     </div>
     );
 }

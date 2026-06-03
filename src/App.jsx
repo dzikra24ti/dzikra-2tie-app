@@ -15,6 +15,7 @@ import Orders from "./pages/Orders";
 import Customers from "./pages/Customers";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./pages/NotFound";
+import Products from "./pages/Products";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/customers" element={<Customers />} />
+            <Route path="/products" element={<Products />} />
             </Route>
           <Route path="*" element={<NotFound />} />
           <Route element={<AuthLayout/>}>

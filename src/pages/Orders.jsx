@@ -1,6 +1,7 @@
 import PageHeader from "../components/PageHeader";
 
 export default function Orders() {
+
   const orders = [
     {
       order_id: "ORD001",
@@ -109,6 +110,9 @@ export default function Orders() {
     },
   ];
   return (
+      <div>
+    <PageHeader title="Orders" currentBreadcrumb="Order List" />
+
     <div className="container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">
@@ -168,5 +172,6 @@ export default function Orders() {
         </table>
       </div>
     </div>
+  </div>
   );
 }

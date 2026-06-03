@@ -110,6 +110,7 @@ export default function Customers() {
   ]
 
   return (
+    <div><PageHeader title="Customers" currentBreadcrumb="Customers List" />
     <div className="container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">
@@ -170,6 +171,7 @@ export default function Customers() {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 }
