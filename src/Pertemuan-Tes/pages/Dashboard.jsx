@@ -5,15 +5,15 @@ export default function Dashboard() {
     return (
         <div className="space-y-8 animate-in fade-in">
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="bg-white p-6 rounded-[32px] shadow-sm border border-yellow-50">
+                <div className="bg-white p-6 rounded-32px shadow-sm border border-yellow-50">
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Pendapatan Hari Ini</p>
                     <p className="text-2xl font-black text-gray-800">Rp 2.000.000</p>
                 </div>
-                <div className="bg-white p-6 rounded-[32px] shadow-sm border border-yellow-50">
+                <div className="bg-white p-6 rounded-32px shadow-sm border border-yellow-50">
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Laba Bersih</p>
                     <p className="text-2xl font-black text-green-600">Rp 700.000</p>
                 </div>
-                <div className="bg-[#FFFBEB] p-6 rounded-[32px] border-2 border-dashed border-yellow-300 hidden lg:block">
+                <div className="bg-[#FFFBEB] p-6 rounded-32px border-2 border-dashed border-yellow-300 hidden lg:block">
                     <p className="text-xs font-bold text-yellow-700 uppercase tracking-widest mb-1">Status Kedai</p>
                     <p className="text-xl font-black text-yellow-700 italic">🔥 SANGAT RAMAI</p>
                 </div>
@@ -56,7 +56,7 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    <button className="w-full mt-10 bg-yellow-500 text-white py-5 rounded-[24px] font-black shadow-2xl shadow-yellow-900/20 active:scale-95 transition-all flex justify-between px-8">
+                    <button className="w-full mt-10 bg-yellow-500 text-white py-5 rounded-24px font-black shadow-2xl shadow-yellow-900/20 active:scale-95 transition-all flex justify-between px-8">
                         <span>BAYAR</span>
                         <span>Rp 29.000</span>
                     </button>

@@ -30,7 +30,7 @@ const Laporan = () => {
         </div>
       </div>
 
-      <div className="mt-8 bg-white p-8 rounded-[40px] shadow-sm border border-yellow-50 min-h-[300px] flex items-center justify-center">
+      <div className="mt-8 bg-white p-8 rounded-[40px] shadow-sm border border-yellow-50 min-h-300px flex items-center justify-center">
         <p className="text-gray-300 italic font-medium">Grafik penjualan akan tampil di sini...</p>
       </div>
     </div>
