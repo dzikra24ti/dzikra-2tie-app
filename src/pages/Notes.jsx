@@ -1,4 +1,4 @@
-import { AiFillDelete } from "react-icons/ai"; 
+import { AiFillDelete } from "react-icons/ai";
 import PageHeader from "../components/PageHeader";
 import AlertBox from "../components/AlertBox";
 import GenericTable from "../components/GenericTable";
@@ -11,7 +11,7 @@ export default function Notes() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  
+
   // State untuk menampung data daftar catatan
   const [notes, setNotes] = useState([]);
 
@@ -21,20 +21,20 @@ export default function Notes() {
     status: "",
   });
 
-    // Memanggil fetchNotes beserta error/loading handling
-    const loadNotes = async () => {
-        try {
-            setLoading(true)
-            setError("")
-            const data = await notesAPI.fetchNotes()
-            setNotes(data)
-        } catch (err) {
-            setError("Gagal memuat catatan")
-            console.error(err)
-        } finally {
-            setLoading(false)
-        }
+  // Memanggil fetchNotes beserta error/loading handling
+  const loadNotes = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const data = await notesAPI.fetchNotes();
+      setNotes(data);
+    } catch (err) {
+      setError("Gagal memuat catatan");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
+  };
 
   // Memanggil loadNotes secara otomatis saat komponen pertama kali di-render
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function Notes() {
       [name]: value,
     });
   };
-        
+
   // Handle form submission for creating notes
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,10 +68,9 @@ export default function Notes() {
 
       // Hilangkan pesan Success setelah 3 detik
       setTimeout(() => setSuccess(""), 3000);
-      
+
       // Panggil Ulang loadNotes untuk refresh data (Sekarang sudah aman)
       loadNotes();
-        
     } catch (err) {
       setError(`Terjadi kesalahan: ${err.message}`);
     } finally {
@@ -79,26 +78,26 @@ export default function Notes() {
     }
   };
 
-   // Handle untuk aksi hapus data
-    const handleDelete = async (id) => {
-        const konfirmasi = confirm("Yakin ingin menghapus catatan ini?")
-        if (!konfirmasi) return
+  // Handle untuk aksi hapus data
+  const handleDelete = async (id) => {
+    const konfirmasi = confirm("Yakin ingin menghapus catatan ini?");
+    if (!konfirmasi) return;
 
-        try {
-            setLoading(true)
-            setError("")
-            setSuccess("")
+    try {
+      setLoading(true);
+      setError("");
+      setSuccess("");
 
-            await notesAPI.deleteNote(id)
+      await notesAPI.deleteNote(id);
 
-            // Refresh data
-            loadNotes()
-        } catch (err) {
-            setError(`Terjadi kesalahan: ${err.message}`)
-        } finally {
-            setLoading(false)
-        }
+      // Refresh data
+      loadNotes();
+    } catch (err) {
+      setError(`Terjadi kesalahan: ${err.message}`);
+    } finally {
+      setLoading(false);
     }
+  };
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -149,64 +148,61 @@ export default function Notes() {
                         focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed
                         transition-all duration-200 shadow-lg"
           >
-             {loading ? "Mohon Tunggu..." : "Tambah Data"}
+            {loading ? "Mohon Tunggu..." : "Tambah Data"}
           </button>
         </form>
       </div>
 
-    {/* Notes Table */}
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden mt-10">
+      {/* Notes Table */}
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden mt-10">
         <div className="px-6 py-4 ">
-            <h3 className="text-lg font-semibold">
-                Daftar Catatan ({notes.length})
-            </h3>
+          <h3 className="text-lg font-semibold">
+            Daftar Catatan ({notes.length})
+          </h3>
         </div>
-        
+
         {loading && <LoadingSpinner text="Memuat catatan..." />}
 
-        {!loading && notes.length === 0 && !error &&(
-            <EmptyState text="Belum ada catatan. Tambah catatan pertama!" />
+        {!loading && notes.length === 0 && !error && (
+          <EmptyState text="Belum ada catatan. Tambah catatan pertama!" />
         )}
 
         {!loading && notes.length === 0 && error && (
-            <EmptyState text="Terjadi Kesalahan. Coba lagi nanti." />
+          <EmptyState text="Terjadi Kesalahan. Coba lagi nanti." />
         )}
-        
-        {!loading && notes.length > 0 ?(
-        <GenericTable
-            columns={["#", "Judul", "Isi Catatan","Hapus"]}
+
+        {!loading && notes.length > 0 ? (
+          <GenericTable
+            columns={["#", "Judul", "Isi Catatan", "Hapus"]}
             data={notes}
             renderRow={(note, index) => (
-                <>
-                    <td className="px-6 py-4 font-medium text-gray-700">
-                        {index + 1}.
-                    </td>
-                    <td className="px-6 py-4">
-                        <div className="font-semibold text-emerald-600">
-                            {note.title}
-                        </div>
-                    </td>
-                    <td className="px-6 py-4 max-w-xs">
-                        <div className="truncate text-gray-600">
-                            {note.content}
-                        </div>
-                    </td>
-                     <td className="px-6 py-4 max-w-xs">
-	              <div className="truncate text-gray-600">
-	                  <button
-	                      onClick={() => handleDelete(note.id)}
-	                      disabled={loading}
-	                  >
-	                      <AiFillDelete className="text-red-400 text-2xl hover:text-red-600 transition-colors" />  
-	                  </button>
-	              </div>
-	          </td>
-                </>
-                
+              <>
+                <td className="px-6 py-4 font-medium text-gray-700">
+                  {index + 1}.
+                </td>
+                <td className="px-6 py-4">
+                  <div className="font-semibold text-emerald-600">
+                    {note.title}
+                  </div>
+                </td>
+                <td className="px-6 py-4 max-w-xs">
+                  <div className="truncate text-gray-600">{note.content}</div>
+                </td>
+                <td className="px-6 py-4 max-w-xs">
+                  <div className="truncate text-gray-600">
+                    <button
+                      onClick={() => handleDelete(note.id)}
+                      disabled={loading}
+                    >
+                      <AiFillDelete className="text-red-400 text-2xl hover:text-red-600 transition-colors" />
+                    </button>
+                  </div>
+                </td>
+              </>
             )}
-        />
-        		    ) : null}
-		</div>
+          />
+        ) : null}
+      </div>
     </div>
   );
 }
