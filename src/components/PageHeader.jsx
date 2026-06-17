@@ -14,13 +14,6 @@ export default function PageHeader({ title = "Dashboard", currentBreadcrumb = "O
                     <span id="breadcrumb-current" className="text-gray-500">{currentBreadcrumb}</span>
                 </div>
             </div>
-
-            {/* Tombol Aksi */}
-            <div id="action-button">
-                <button id="add-button" className="bg-hijau hover:bg-opacity-90 text-white font-medium px-5 py-2.5 rounded-xl transition-all shadow-sm">
-                    Add Button
-                </button>
-            </div>
         </div>
     );
 }
