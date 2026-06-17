@@ -22,5 +22,11 @@ export const notesAPI = {
 
         async deleteNote(id) {
         await axios.delete(`${API_URL}?id=eq.${id}`, { headers })
+    },
+
+    async loginUser(tableName, email, password) {
+        const url = `https://zztvprtbhdmazafbgync.supabase.co/rest/v1/user?email=eq.${encodeURIComponent(email)}&password=eq.${encodeURIComponent(password)}`
+        const response = await axios.get(url, { headers })
+        return response.data // Menghasilkan array data user jika ditemukan
     }
 }

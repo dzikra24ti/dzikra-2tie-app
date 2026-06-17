@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Pastikan sudah install: npm install axios
-import Loading from "../../components/Loading";
-import { BsFillExclamationDiamondFill } from "react-icons/bs"; // Pastikan sudah install: npm install react-icons
+import { notesAPI } from "../../services/notesAPI"; // Import service API terpusat Anda
+import { BsFillExclamationDiamondFill } from "react-icons/bs"; 
 import { ImSpinner2 } from "react-icons/im";
 
 export default function Login() {
@@ -25,93 +24,112 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setError(""); // Reset error setiap submit
+        setError(""); // Reset error setiap kali tombol submit diklik
 
-        axios
-            .post("https://dummyjson.com/user/login", {
-                // DummyJSON menggunakan field 'username', pastikan input email diisi username yang valid
-                username: dataForm.email, 
-                password: dataForm.password,
-            })
-            .then((response) => {
-                // Redirect ke dashboard jika login sukses (status 200)
+        try {
+            // 🚨 GANTI 'users' di bawah ini jika nama tabel kustom Anda di Supabase berbeda
+            const namaTabelSupabase = "users"; 
+
+            // Memanggil fungsi loginUser dari notesAPI
+            const data = await notesAPI.loginUser(
+                namaTabelSupabase, 
+                dataForm.email, 
+                dataForm.password
+            );
+
+            // Jika Supabase mengembalikan data di dalam array, artinya email & password COCOK
+            if (data && data.length > 0) {
+                const userActive = data[0];
+                
+                // Simpan data login user ke dalam LocalStorage sebagai session sederhana
+                localStorage.setItem("user_session", JSON.stringify(userActive));
+
+                // Alihkan halaman ke dashboard
                 navigate("/dashboard");
-            })
-            .catch((err) => {
-                if (err.response) {
-                    setError(err.response.data.message || "Login Gagal!");
-                } else {
-                    setError(err.message || "Terjadi kesalahan koneksi");
-                }
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+            } else {
+                // Jika array kosong ([]), berarti records tidak ditemukan
+                setError("Email atau password salah!");
+            }
+
+        } catch (err) {
+            console.error("Login Error:", err);
+            if (err.response) {
+                setError(`Error Server: ${err.response.data.message || "Gagal melakukan verifikasi"}`);
+            } else {
+                setError("Network Error: Periksa koneksi internet Anda atau pastikan BASE URL Supabase sudah benar.");
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
-    // Tampilkan loading screen jika sedang memproses (Opsional, pilih salah satu dengan loadingInfo)
-    // Jika ingin loading screen full:
-    // if (loading) return <Loading />;
-
     return (
-        <div className="max-w-md mx-auto">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
-                Welcome Back 👋
-            </h2>
+        <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
+            {/* Logo Restoran / Judul */}
+            <div className="text-center mb-6">
+                <p className="text-sm text-gray-500 mt-1">Welcome Back 👋</p>
+            </div>
 
-            {/* Menampilkan Pesan Error */}
+            {/* Alert Box Menampilkan Pesan Error */}
             {error && (
-                <div className="bg-red-200 mb-5 p-4 text-sm font-light text-gray-600 rounded flex items-center">
-                    <BsFillExclamationDiamondFill className="text-red-600 me-2 text-lg" />
-                    {error}
+                <div className="bg-red-100 border border-red-200 mb-5 p-4 text-sm font-medium text-red-700 rounded-xl flex items-center shadow-sm">
+                    <BsFillExclamationDiamondFill className="text-red-600 me-2 text-lg flex-shrink-0" />
+                    <span>{error}</span>
                 </div>
             )}
 
-            {/* Menampilkan Status Loading Kecil */}
+            {/* Alert Box Menampilkan Status Loading */}
             {loading && (
-                <div className="bg-gray-200 mb-5 p-4 text-sm rounded flex items-center">
-                    <ImSpinner2 className="me-2 animate-spin" />
-                    Mohon Tunggu...
+                <div className="bg-gray-50 border border-gray-200 mb-5 p-4 text-sm rounded-xl text-gray-600 flex items-center shadow-sm">
+                    <ImSpinner2 className="me-2 animate-spin text-green-500 text-lg" />
+                    Memverifikasi akun, mohon tunggu...
                 </div>
             )}
 
-            <form onSubmit={handleSubmit}>
-                <div className="mb-5">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Username / Email
+            <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">
+                        Email Address
                     </label>
                     <input
-                        type="text"
-                        name="email" // Harus sama dengan key di dataForm
+                        type="email"
+                        name="email" 
                         value={dataForm.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
-                        placeholder="emilys"
+                        disabled={loading}
+                        className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 disabled:opacity-60"
+                        placeholder="Masukkan email Anda"
                         required
                     />
                 </div>
-                <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+
+                <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">
                         Password
                     </label>
                     <input
                         type="password"
-                        name="password" // Harus sama dengan key di dataForm
+                        name="password" 
                         value={dataForm.password}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
-                        placeholder="emilyspass"
+                        disabled={loading}
+                        className="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 disabled:opacity-60"
+                        placeholder="Masukkan password Anda"
                         required
                     />
                 </div>
+
                 <button
                     type="submit"
                     disabled={loading}
-                    className={`w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:shadow-green-200 transition duration-300 active:scale-[0.98] transform ${
+                        loading ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
                 >
                     {loading ? "Logging in..." : "Login"}
                 </button>
             </form>
+
         </div>
     );
 }
